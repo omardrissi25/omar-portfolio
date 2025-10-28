@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 160px; /* smaller and more elegant */
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 4px solid rgba(255,255,255,0.9);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Make sure the photo fits perfectly */
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover svg {
+            transform: scale(1.15);
+        }
+        .social-btn {
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #764ba2;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            background: white;
+            margin: 40px auto;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #667eea;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            color: white;
+        }
+
+        .project-body {
+            padding: 25px;
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 30px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 30px;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .experience-item:hover::before {
+            background: white;
+            box-shadow: 0 0 0 3px white;
+        }
+
+        .experience-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .experience-date {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            nav ul { gap: 20px; }
+            section { padding: 40px 20px; }
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+            </ul>
+        </nav>
+        <header>
+    <div class="profile-img">
+    <img src="assets/profile.PNG" alt="Omar Drissi Lahsini">
+    </div>
+    <h1>Omar Drissi Lahsini</h1>
+    <p class="tagline">Future Data Engineer | Data never sleeps — and neither do my pipelines.</p>
+
+    <div class="social-links">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/omar-drissi-lahsini-686496283/" 
+           target="_blank" class="social-btn" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" 
+                 viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 
+                2.239-5 5v14c0 2.761 2.239 5 
+                5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 
+                19h-3v-10h3v10zm-1.5-11.268c-.966 
+                0-1.75-.79-1.75-1.764s.784-1.764 
+                1.75-1.764 1.75.79 1.75 
+                1.764-.784 1.764-1.75 1.764zm13.5 
+                11.268h-3v-5.356c0-1.276-.025-2.918-1.775-2.918-1.777 
+                0-2.05 1.389-2.05 2.828v5.446h-3v-10h2.881v1.367h.042c.401-.76 
+                1.379-1.562 2.839-1.562 3.035 0 3.59 1.997 3.59 
+                4.594v5.601z" />
+            </svg>
+            LinkedIn
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/omardrissi25" 
+           target="_blank" class="social-btn" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" 
+                 viewBox="0 0 24 24">
+                <path d="M12 .297c-6.63 
+                0-12 5.373-12 12 0 5.302 3.438 
+                9.8 8.205 11.387.6.113.82-.258.82-.577 
+                0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61 
+                -.546-1.387-1.333-1.757-1.333-1.757-1.087-.744.083-.729.083-.729 
+                1.205.084 1.84 1.237 1.84 1.237 
+                1.07 1.835 2.807 1.304 3.492.997 
+                .108-.776.818-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 
+                0-1.31.468-2.382 1.235-3.22 
+                -.135-.303-.54-1.524.105-3.176 0 0 1.005-.322 
+                3.3 1.23.957-.266 1.983-.399 
+                3.005-.403 1.022.004 2.048.137 
+                3.006.403 2.28-1.552 3.285-1.23 
+                3.285-1.23 .645 1.653.24 2.874.12 3.176 
+                .765.838 1.23 1.909 1.23 3.22 
+                0 4.61-2.807 5.625-5.48 5.92 
+                .43.372.81 1.102.81 2.222 
+                0 1.604-.015 2.896-.015 3.286 
+                0 .315.21.69.825.57 
+                C20.565 22.092 24 17.592 24 
+                12.297c0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+        </a>
+        <a href="assets/my_cv.pdf" target="_blank" class="social-btn" download>
+    <!-- Resume Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" 
+        viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 
+                 2 0 0 0 2 2h12a2 2 0 0 0 
+                 2-2V8l-6-6zm1 17h-6v-2h6v2zm0-4h-6v-2h6v2zm-2-6V3.5L18.5 
+                 9H13z"/>
+    </svg>
+    Resume
+</a>
+    </div>
+</header>
+
+
+        
+
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>“Final-year Data Engineering student at the International University of Rabat, I am looking for a 6-month graduation internship starting February 2026, passionate about large-scale data ecosystems and smart data automation. </p>
+                <p style="margin-top: 20px;">I’ve contributed to projects designing and automating data pipelines across distributed environments — always striving for excellence in quality, performance, and reliability.”</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>⚙️ Data Engineering & Big Data </h3>
+                    <p>Traitement distribués et ETL/ELT : Apache Spark, Hadoop</p>
+                        <p>Workflows et automatisation : Apache Airflow, NiFi</p>
+                        <p>Streaming temps réel : Kafka, Kafka Connect</p>
+                        <p>Lakehouse & formats : S3/MinIO, HDFS, Parquet, Delta Lake</p>
+                    
+                </div>
+                <div class="skill-card">
+                    <h3>☁️ Cloud & Infrastructure</h3>
+                    <p>Cloud : Azure (Data Services & Compute)</p>
+                    <p>Conteneurisation et orchestration : Docker, Kubernetes</p>
+                    <p>Distributions Hadoop : Cloudera, Hortonworks</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🖥️ Développement & DataOps</h3>
+                    <p>MongoDB, PostgreSQL, MySQL, Redis, Database Design</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🔭 Monitoring & Observabilité</h3>
+                    <p>Git, Docker, AWS, CI/CD, Agile, Testing, Problem Solving</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🚀 Project One</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>Plateforme d'Analytics Trading en Temps Réel | Data Lakehouse Hybride</p>
+                        <p style="margin-top: 15px; font-weight: 600;">Technologies: Kafka, Spark, Apache Iceberg,PostgreSQL,Airflow, dbt, Trino, Docker, Superset, Metabase</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🎯 Project Two</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>Tourisme & Hôtellerie (ONMT, données Booking, Airbnb)</p>
+                        <p style="margin-top: 15px; font-weight: 600;">Technologies: Spark, Airflow</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>💡 Project Three</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>YesOrNo – Prédiction du comportement d’achat via les réseaux sociaux</p>
+                        <p style="margin-top: 15px; font-weight: 600;">Technologies: Google Form, machine learning models</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <h3>DXC Technology – Data Engineering Internship</h3>
+                    <div class="experience-date">June 2025 to August 2025 | RABAT</div>
+                    <p> - Conception d’un pipeline distribué de bout en bout : génération de logs avec IA (GPT-4), détection d’anomalies, classification MITRE ATT&CK et stockage S3 (MinIO). </p>
+                    <p> - Orchestration et automatisation du flux via Python, Pydantic, MongoDB et Docker, avec validation et transformation des données en continu. </p> 
+                    <p> - Création d’un dashboard interactif Streamlit pour la visualisation et le suivi temps réel des alertes.</p>
+                    <p><strong>Stacks : </strong>Python, Spark, MongoDB, MinIO, Streamlit, Docker, MITRE ATT&CK.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>IT FRONTLINE  – Data Engineering Internship</h3>
+                    <div class="experience-date">july 2024 to semptember 2024 | PARIS</div>
+                    <p> - Développement d’une solution d’ingestion automatisée de données publiques de prix de carburants via API Open Data. </p>
+                    <p> - Transformation et intégration des données dans un pipeline Spark déployé sur Kubernetes avec stockage S3.</p> 
+                    <p> - Renforcement de la robustesse du système grâce à Docker et à l’orchestration Kubernetes.</p>
+                    <p><strong>Stacks : </strong>Python, Spark, Kubernetes, Docker, MinIO.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>ONCF – Software Engineering Internship</h3>
+                    <div class="experience-date">july 2023 to August 2023 | RABAT </div>
+                    <p> - Développement backend de l’application de gestion des anomalies du SI FRET, avec amélioration du suivi des incidents et de la qualité des données.</p>
+                    <p> - Conception et intégration de services de synchronisation des flux avec une authentification sécurisée, en collaboration avec le front-end sur le dashboard opérationnel.</p> 
+                    <p><strong>Stacks : </strong>Spring Boot, MySQL, Git</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Your Name. Built with passion and dedication.</p>
+        </footer>
+    </div>
+</body>
+</html>
